@@ -8,22 +8,32 @@ using namespace std;
 class  Shape
 {
 private:
-    /* data */
+    int side;
 public:
-     Shape(/* args */);
-    ~ Shape();
+     Shape(int side){
+        this->side=side;
+     };
+     void area(){
+        cout<<"area"<<side*side;
+     }
+    // ~ Shape();
 };
 
- Shape:: Shape(/* args */)
-{
-}
 
- Shape::~ Shape()
-{
-}
 
 int main()
 {
-    
+    int side;
+    Shape* s[5];
+    for(int i=0;i<5;i++){
+        cin>>side;
+        s[i] = new Shape(side);
+    }
+
+    for(int i=0;i<5;i++){
+        // cin>>side;
+        s[i]->area();
+    }
+
     return 0;
 }
