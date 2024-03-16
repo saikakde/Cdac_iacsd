@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include <string.h>
+#include <bits/stdc++.h>
 using namespace std;
 class Book
 {
 private:
+int id;
     string name, author;
-    int cost;
 
 public:
     // Book(string name,string author,int cost){
@@ -13,20 +12,47 @@ public:
     //     this->author= author;
     //     this->cost = cost;
     // };
-    void accept(string n, string a, int c)
+    void accept(int id,string name, string author)
     {
-
         this->name = name;
         this->author = author;
-        this->cost = cost;
+        this->id = id;
         cout << "----book created----" << endl;
     }
     void display()
     {
-        cout << name << "    " << author << "    " << cost << endl;
+        cout << id<< "    " << name << "    " << author << "    "  << endl;
     };
-    ~Book()
+~Book()
     {
-        cout << "destructor" << endl;
     };
+
+   
 };
+void readBook(string name, Book &b2)
+{
+    // Book b2;
+    ifstream input(name, ios::binary);
+    input.read((char *)&b2, sizeof(Book));
+    while (!input.eof())
+    {
+
+        // b2.display();
+        input.read((char *)&b2, sizeof(Book));
+    }
+}
+void writeBook(string filename, Book &b1)
+{
+
+    // ifstream--->read
+    // ofstream---write
+    // fstream ---->read/write   ios::out ios::binary
+
+    ofstream obj;
+    obj.open(filename, ios::binary | ios::app); // open file in append mode
+    cout << sizeof(Book);
+    obj.write((char *)&b1, sizeof(Book));
+    obj.close();
+    cout << "-----book get stored in file -----" << endl;
+}
+    

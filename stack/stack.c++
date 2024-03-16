@@ -31,7 +31,7 @@ static int counter;
 class Stack1
 {
 private:
-    int arr[10];
+    int arr[3];
 
 public:
     void push(int number)
@@ -67,40 +67,81 @@ public:
 };
 
 int main()
+
 {
-    try
+    cout << "enter the choice: "<<endl;
+    int ch, num;
+    string error;
+    Stack1 s;
+    do
     {
-        // // exception for pop
-        // Stack1 s;
-        // s.push(10);
-       
+        cout<<"1. push"<<endl;
+        cout<<"2. pop"<<endl;
+        cout<<"3. display"<<endl;
+        cin >> ch;
 
-        // s.print();
-        // cout << "\npop: " << s.pop() << endl;
+        switch (ch)
+        {
+        case 1:
+            try
+            {
+                cout << "\nenter the number to be pushed: ";
+                cin >> num;
+                s.push(num);
+            }
+            catch (StackException *obj)
+            {
+                cout << "\nException " << obj->message << endl;
+            }
+                break;
+            case 3:
+                s.print();
+                break;
+            case 2:
+            try
+            {                
+                cout << "\npopped element: "<<s.pop()<<endl;
+            }
+            catch (StackException *obj)
+            {
+                cout << "\nException " << obj->message << endl;
+            }
+                break;
+   
+        }
+    } while (ch != 0);
+    // try
+    // {
+    // // exception for pop
+    // Stack1 s;
+    // s.push(10);
 
-        // s.print();
-        // cout << "\npop: " << s.pop() << endl;
+    // s.print();
+    // cout << "\npop: " << s.pop() << endl;
 
-        cout << "\n------------------\n";
-        cout << "push exception\n";
-        Stack1 s;
-        s.push(10);
-        s.push(9);
-        s.push(8);
-        s.push(7);
-        s.push(6);
+    // s.print();
+    // cout << "\npop: " << s.pop() << endl;
 
-        s.print();
-        s.push(5);
-        s.push(4);
-        s.push(3);
-        s.push(2);
-        s.push(1);
-        s.push(0);
-    }
-    catch (StackException *obj)
-    {
-        cout << " Exception " << obj->message << endl;
-    }
-    return 0;
+    //     cout << "\n------------------\n";
+    //     cout << "push exception\n";
+    //     Stack1 s;
+    //     s.push(10);
+    //     s.push(9);
+    //     s.push(8);
+    //     s.push(7);
+    //     s.push(6);
+
+    //     s.print();
+    //     s.push(5);
+    //     s.push(4);
+    //     s.push(3);
+    //     s.push(2);
+    //     s.push(1);
+    //     s.push(0);
+    // }
+    // catch (StackException *obj)
+    // {
+    //     cout << " Exception " << obj->message << endl;
+    // }
+    // return 0;
 }

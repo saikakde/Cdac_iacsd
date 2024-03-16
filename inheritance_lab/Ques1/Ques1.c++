@@ -16,12 +16,12 @@ public:
     Mammal(string feature, string type) : Animal(type)
     {
 
-        cout << "enter the features of mammal:\n";
+        // cout << "enter the features of mammal:\n";
         this->feature = feature;
     };
     void print()
     {
-        cout << "\nmammals can " << feature;
+        cout << "mammals can " << feature<<endl;
     }
     ~Mammal()
     {
@@ -36,12 +36,11 @@ private:
 public:
     Bird(string feature, string type) : Animal(type)
     {
-        cout << "enter the features of bird:\n";
         this->feature = feature;
     };
     void print()
     {
-        cout << "birds can " << feature;
+        cout << "birds can " << feature<<endl;
     }
     ~Bird()
     {
@@ -56,12 +55,11 @@ private:
 public:
     Fish(string feature, string type) : Animal(type)
     {
-        cout << "enter the features of fish:\n";
         this->feature = feature;
     };
     void print()
     {
-        cout << "fish can " << feature;
+        cout << "fish can " << feature<<endl;
     }
     ~Fish()
     {
@@ -72,23 +70,35 @@ public:
 int main()
 {
     string feature, type;
-    cin >> type;
-    cout<<endl;
-    getline(cin, feature);
+    cout << "Enter the type of animal: ";
+    getline(cin, type); // Read type using getline() to capture the entire line
+
+    cout << "Enter the features: ";
+    getline(cin, feature); // Read features using getline() to capture the entire line
+
     Mammal m1(feature, type);
     m1.print();
+// ----------------------------------------------
+    cout << endl;
+    cout << "Enter the type of animal: ";
+    getline(cin, type); // Read type using getline() to capture the entire line
 
-// cout<<endl;
-//     cin >> type;
-//     getline(cin, feature);
-//     Bird b1(feature, type);
-//     b1.print();
+    cout << "Enter the features: ";
+    getline(cin, feature); // Read features using getline() to capture the entire line
 
-// cout<<endl;
-//     cin >> type;
-//     getline(cin, feature);
-//     Fish f1(feature, type);
-//     f1.print();
+    Bird b1(feature, type);
+    b1.print();
+
+    // --------------------------------------------
+    cout << endl;
+    cout << "Enter the type of animal: ";
+    getline(cin, type); // Read type using getline() to capture the entire line
+
+    cout << "Enter the features: ";
+    getline(cin, feature); // Read features using getline() to capture the entire line
+
+    Fish f1(feature, type);
+    f1.print();
 
     return 0;
 }
