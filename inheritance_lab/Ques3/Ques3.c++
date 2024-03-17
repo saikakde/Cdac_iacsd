@@ -3,7 +3,9 @@
 // Create a base class Employee with attributes such as name, employee ID,
 // and salary. Then, derive classes like Manager and Developer, each with
 // its own attributes and methods. Implement a common method, like calculate_salary(),
+
 // in the base class.
+#include <bits/stdc++.h>
 #include <iostream>
 #include "Employee.h"
 #include <string.h>
@@ -30,6 +32,10 @@ public:
         cout << "\nnet Salary: ";
         return Employee::computeNetSalary() + incentive;
     }
+    void managersFeature()
+    {
+        cout << "Manager is the main lead of teams: ";
+    }
 
     void display()
     {
@@ -45,30 +51,25 @@ public:
     };
 };
 
-// 1.3 Worker state  --id,name,basic,deptId,hoursWorked,hourlyRate
-// Methods :
-// 1.  compute net salary (formula:  = basic+(hoursWorked*hourlyRate) --override computeNetSalary
-// 2. get hrlyRate of the worker  -- add a new method to return hourly rate of a worker.(getter)
-
-class Worker : public Employee
+class Developer : public Employee
 {
 private:
     string deptName;
     int hoursWorked, hourlyRate;
 
 public:
-    Worker() : Employee()
+    Developer() : Employee()
     {
         hoursWorked = hourlyRate = 0;
     }
-    Worker(int id, string name, double basicSalary, int hoursWorked, int hourlyRate) : Employee(id, name, basicSalary)
+    Developer(int id, string name, double basicSalary, int hoursWorked, int hourlyRate) : Employee(id, name, basicSalary)
     {
         this->hourlyRate = hourlyRate;
         this->hoursWorked = hoursWorked;
     }
     double computeNetSalary()
     {
-        cout << "\nnet Salary of worker: " << endl;
+        cout << "\nnet Salary of Developer: " << endl;
         return Employee::computeNetSalary() + (hoursWorked * hourlyRate);
     }
     void getHourlyRate()
@@ -84,8 +85,12 @@ public:
         cout << "\nbasic Salary: " << Employee::computeNetSalary();
         computeNetSalary();
     }
+    void featureDeveloper()
+    {
+        cout << "developer buids the project";
+    }
 
-    ~Worker()
+    ~Developer()
     {
         cout << endl;
     }
@@ -96,11 +101,11 @@ int main()
     // mgr.display();
 
     // cout << "\n-------------------------------\n";
-    // Worker w(2, "Raju", 10000, 5, 100);
+    // Developer w(2, "Raju", 10000, 5, 100);
     // w.display();
 
     // double k=w.computeNetSalary();
-    // cout<<"net salary of worker is: "<<k;
+    // cout<<"net salary of Developer is: "<<k;
 
     // ------------------------------------------
     // const int MAX_EMPLOYEES = 10;
@@ -110,7 +115,7 @@ int main()
     // Manager mgr(1, "Sai", 200000, 10000, "Developer");
     // employees[empCount++] = &mgr;
 
-    // Worker w(2, "Raju", 10000, 5, 100);
+    // Developer w(2, "Raju", 10000, 5, 100);
     // employees[empCount++] = &w;
 
     // cout << "\nEmployee Details:\n";
@@ -124,14 +129,16 @@ int main()
     //     cout << "Enter the size of the employee array: ";
     //     cin >> size;
     // Employee* employees[size];
-    Employee *employees = nullptr;
+    vector<Employee *> employees;
+    // vector<Employee>::iterator it=employees.begin();;
+
     int empCount = 0;
 
     while (true)
     {
         cout << "\nOptions:\n";
         cout << "1. Hire Manager\n";
-        cout << "2. Hire Worker\n";
+        cout << "2. Hire Developer\n";
         cout << "3. Display information of all employees' net salary\n";
         cout << "4. Exit\n";
         cout << "Enter your choice: ";
@@ -156,16 +163,19 @@ int main()
             cin >> incentive;
             cout << "Department Name: ";
             cin >> deptName;
+            employees.push_back(new Manager(id, name, basicSalary, incentive, deptName));
 
+            // {
             // Increase array size and add Manager
-            Employee *temp = new Manager[id];
-            for (int i = 0; i < empCount; ++i)
-            {
-                temp[i] = employees[i];
-            }
-            temp[empCount++] = Manager(id, name, basicSalary, incentive, deptName);
-            delete[] employees;
-            employees = temp;
+            // Employee *temp = new Manager[id];
+            // for (int i = 0; i < empCount; ++i)
+            // {
+            //     temp[i] = employees[i];
+            // }
+            // temp[empCount++] = Manager(id, name, basicSalary, incentive, deptName);
+            // delete[] employees;
+            // employees = temp;
+            // }
             break;
         }
         case 2:
@@ -173,7 +183,7 @@ int main()
             int id, hoursWorked;
             string name, deptName;
             double basicSalary, hourlyRate;
-            cout << "Enter Worker details:\n";
+            cout << "Enter Developer details:\n";
             cout << "ID: ";
             cin >> id;
             cout << "Name: ";
@@ -185,34 +195,43 @@ int main()
             cout << "Hourly Rate: ";
             cin >> hourlyRate;
 
-            // Increase array size and add Worker
-            Employee *temp = new Worker[id];
-            for (int i = 0; i < empCount; ++i)
-            {
-                temp[i] = employees[i];
-            }
-            temp[empCount++] = Worker(id, name, basicSalary, hoursWorked, hourlyRate);
-            delete[] employees;
-            employees = temp;
+            employees.push_back(new Developer(id, name, basicSalary, hoursWorked, hourlyRate));
+            // Increase array size and add Developer
+            // Employee *temp = new Developer[id];
+            // for (int i = 0; i < empCount; ++i)
+            // {
+            //     temp[i] = employees[i];
+            // }
+            // temp[empCount++] = Developer(id, name, basicSalary, hoursWorked, hourlyRate);
+            // delete[] employees;
+            // employees = temp;
             break;
         }
         case 3:
         {
-            cout << "\nEmployee Details:\n";
-            for (int i = 0; i < empCount; ++i)
+
+            // while(!employees.empty())
+            int i = 0;
+            while (i < employees.size())
             {
-                employees[i].display();
-                cout << endl;
+                if (typeid(employees[i]) == typeid(Manager))
+                {
+
+                    Manager *b1 = dynamic_cast<Manager *>(employees[i]);
+                    b1->managersFeature();
+                }
+                if (typeid(employees[i]) == typeid(Developer))
+                {
+
+                    Developer *d1 = dynamic_cast<Developer *>(employees[i]);
+                    d1->featureDeveloper();
+                }
             }
             break;
         }
-        case 4:
-            // Release memory before exiting
-            delete[] employees;
-            return 0;
+
         default:
             cout << "Invalid choice!\n";
         }
     }
-    return 0;
-}
+    

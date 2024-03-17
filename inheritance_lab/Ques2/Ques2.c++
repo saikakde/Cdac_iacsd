@@ -77,32 +77,41 @@ int main() {
         cin >> choice;  // Read the user's choice here
 
         switch (choice) {
-            case 1:
+            case 1:{
+                
                 cout << "Enter radius of the circle: ";
                 cin >> radius;
                 Circle circle(radius);
                 circle.area();
                 circle.perimeter();
                 break;
-            case 2:
+            }
+            case 2:{
+                
                 cout << "Enter length and width of the rectangle: ";
                 cin >> length >> width;
                 Rectangle rectangle(length, width);
                 rectangle.area();
                 rectangle.perimeter();
                 break;
-            case 3:
+            }
+            case 3:{
+
                 cout << "Enter lengths of three sides of the triangle: ";
                 cin >> side1 >> side2 >> side3;
                 Triangle triangle(side1, side2, side3);
                 triangle.area();
                 triangle.perimeter();
                 break;
-            case 4:
+            }
+            case 4:{
+
                 cout << "Exiting the program.\n";
                 break;
+            }
             default:
                 cout << "Invalid choice. Please try again.\n";
+                break;
         }
     } while (choice != 4);
 

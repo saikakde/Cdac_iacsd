@@ -1,7 +1,17 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
-int main() {
-    // Your code goes here
-    return 0;
+int main()
+{
+    int a, b, c;
+    printf("enter the angles of triangle");
+    scanf("%d %d %d", &a, &b, &c);
+
+    if (a + b + c != 180)
+    {
+        printf("invalid traingle");
+    }
+    else
+    {
+        printf("valid traingle");
+    }
 }

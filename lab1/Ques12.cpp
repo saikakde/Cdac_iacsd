@@ -2,6 +2,9 @@
 using namespace std;
 
 int main() {
-    // Your code goes here
+    int range;
+    cout<<"enter the range: ";
+    cin>>range;
+    cout<<"sum of series is: "<<(range*(range+1))/2;
     return 0;
 }

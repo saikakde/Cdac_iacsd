@@ -1,7 +1,16 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
 int main() {
-    // Your code goes here
+    int num, factorial = 1;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    for (int i = num; i >= 1; i--) {
+        factorial *= i;
+    }
+
+    printf("Factorial of %d is: %d\n", num, factorial);
+
     return 0;
 }

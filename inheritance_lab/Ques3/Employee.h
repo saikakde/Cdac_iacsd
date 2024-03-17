@@ -20,12 +20,12 @@ Employee(){
         this->basicSalary = salary;
     }
 
-    void display(){
+    virtual void display(){
         cout<<"\nID: "<<id;
         cout<<"\nName: "<<name;
     }
     
-    double computeNetSalary(){
+    virtual double computeNetSalary(){
         return basicSalary;
     }
     ~Employee(){

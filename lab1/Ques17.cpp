@@ -1,7 +1,9 @@
+// 17:Write a program to check entered number is Armstrong number or not.
+
 #include <iostream>
 using namespace std;
 
 int main() {
-    // Your code goes here
+    
     return 0;
 }
