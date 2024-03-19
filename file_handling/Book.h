@@ -1,58 +1,32 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-class Book
-{
+const int MAX_NAME_LENGTH = 50;
+const int MAX_AUTHOR_LENGTH = 50;
+class Book {
 private:
-int id;
-    string name, author;
+    int id;
+    char name[MAX_NAME_LENGTH];
+    char author[MAX_AUTHOR_LENGTH];
 
 public:
-    // Book(string name,string author,int cost){
-    //     this->name = name;
-    //     this->author= author;
-    //     this->cost = cost;
-    // };
-    void accept(int id,string name, string author)
-    {
-        this->name = name;
-        this->author = author;
+    void accept(int id, const char* name, const char* author) {
         this->id = id;
+        strcpy(this->name, name);
+        strcpy(this->author, author);
         cout << "----book created----" << endl;
     }
-    void display()
-    {
-        cout << id<< "    " << name << "    " << author << "    "  << endl;
-    };
-~Book()
-    {
-    };
 
-   
-};
-void readBook(string name, Book &b2)
-{
-    // Book b2;
-    ifstream input(name, ios::binary);
-    input.read((char *)&b2, sizeof(Book));
-    while (!input.eof())
-    {
-
-        // b2.display();
-        input.read((char *)&b2, sizeof(Book));
+    void display() {
+        cout << id << "    " << name << "    " << author << "    " << endl;
     }
-}
-void writeBook(string filename, Book &b1)
-{
 
-    // ifstream--->read
-    // ofstream---write
-    // fstream ---->read/write   ios::out ios::binary
+    // Serialization function to write object to file
+    void writeToFile(ofstream& file) const {
+        file.write(reinterpret_cast<const char*>(this), sizeof(*this));
+    }
 
-    ofstream obj;
-    obj.open(filename, ios::binary | ios::app); // open file in append mode
-    cout << sizeof(Book);
-    obj.write((char *)&b1, sizeof(Book));
-    obj.close();
-    cout << "-----book get stored in file -----" << endl;
-}
-    
+    // Deserialization function to read object from file
+    void readFromFile(ifstream& file) {
+        file.read(reinterpret_cast<char*>(this), sizeof(*this));
+    }
+};
