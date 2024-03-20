@@ -2,7 +2,7 @@
 
 int main(){
     char ch;
-    printf("enter the chaaracter to check if is a vowel");
+    printf("enter the chaaracter to check if is a vowel: ");
     scanf("%c",&ch);
 
     if(ch == 'a' || ch == 'e' ||ch == 'i' ||ch == 'o' || ch == 'u' ){

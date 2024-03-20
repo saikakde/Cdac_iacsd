@@ -20,13 +20,8 @@ public:
         cout << id << "    " << name << "    " << author << "    " << endl;
     }
 
-    // Serialization function to write object to file
-    void writeToFile(ofstream& file) const {
-        file.write(reinterpret_cast<const char*>(this), sizeof(*this));
-    }
-
     // Deserialization function to read object from file
-    void readFromFile(ifstream& file) {
-        file.read(reinterpret_cast<char*>(this), sizeof(*this));
-    }
+    // void readFromFile(ifstream& file) {
+    //     file.read(reinterpret_cast<char*>(this), sizeof(*this));
+    // }
 };

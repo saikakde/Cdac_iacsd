@@ -1,9 +1,9 @@
 #include<stdio.h>
 
 int main(){
-    int basicSalary,tax;
-    printf("enter the basic Salary of employee");
-    scanf("%d",&basicSalary);
+    float basicSalary,tax;
+    printf("enter the basic Salary of employee: ");
+    scanf("%f",&basicSalary);
 
     if(basicSalary <150000){
         tax =0;
@@ -13,6 +13,7 @@ int main(){
         tax = 0.03; // ie 30 percent
 
     }
-    int incometax = basicSalary * tax;
-    printf("income tax is %d",incometax);
+    float incometax=0;
+    incometax= basicSalary * tax;
+    printf("income tax is %f",incometax);
 }
