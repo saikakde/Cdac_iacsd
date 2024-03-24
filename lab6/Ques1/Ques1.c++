@@ -1,12 +1,14 @@
 #include <iostream>
 #include "Employee.h"
 #include <string.h>
+#include <iomanip>
 using namespace std;
 class Manager : public Employee
 {
 private:
     int incentive;
     string deptName;
+    double basicSalary;
 
 public:
     Manager() : Employee()
@@ -14,15 +16,16 @@ public:
         this->incentive = 0;
         this->deptName = "default";
     };
-    Manager(int id, string name, double basicSalary, int incentive, string deptName) : Employee(id, name, basicSalary)
+    Manager(int id, string name, double basicSalary, int incentive, string deptName) : Employee(id, name)
     {
         this->incentive = incentive;
         this->deptName = deptName;
+        this->basicSalary = basicSalary;
     }
     double computeNetSalary()
     {
-        cout << "\nnet Salary: ";
-        return Employee::computeNetSalary() + incentive;
+        // cout << "\nnet Salary: ";
+        return basicSalary + incentive;
     }
 
     void display()
@@ -30,8 +33,8 @@ public:
         Employee::display();
         cout << "\nincentive: " << incentive;
         cout << "\ndept Name: " << deptName;
-        cout << "\nbasic Salary: " << Employee::computeNetSalary();
-        computeNetSalary();
+        cout << "\net Salary: " << computeNetSalary();
+        // computeNetSalary();
     }
     ~Manager()
     {
@@ -48,22 +51,23 @@ class Worker : public Employee
 {
 private:
     string deptName;
-    int hoursWorked, hourlyRate;
+    int hoursWorked, hourlyRate, basicSalary;
 
 public:
     Worker() : Employee()
     {
         hoursWorked = hourlyRate = 0;
     }
-    Worker(int id, string name, double basicSalary, int hoursWorked, int hourlyRate) : Employee(id, name, basicSalary)
+    Worker(int id, string name, double basicSalary, int hoursWorked, int hourlyRate) : Employee(id, name)
     {
         this->hourlyRate = hourlyRate;
         this->hoursWorked = hoursWorked;
+        this->basicSalary = basicSalary;
     }
     double computeNetSalary()
     {
-        cout << "\nnet Salary of worker: " << endl;
-        return Employee::computeNetSalary() + (hoursWorked * hourlyRate);
+        // cout << "\nnet Salary of worker: " << endl;
+        return basicSalary + (hoursWorked * hourlyRate);
     }
     void getHourlyRate()
     {
@@ -75,8 +79,7 @@ public:
         Employee::display();
         getHourlyRate();
         cout << "\nhoursWorked: " << hoursWorked;
-        cout << "\nbasic Salary: " << Employee::computeNetSalary();
-        computeNetSalary();
+        cout << "\net Salary: " << computeNetSalary();
     }
 
     ~Worker()
@@ -86,40 +89,8 @@ public:
 };
 int main()
 {
-    // Manager mgr(1, "Sai", 200000, 10000, "Developer");
-    // mgr.display();
-
-    // cout << "\n-------------------------------\n";
-    // Worker w(2, "Raju", 10000, 5, 100);
-    // w.display();
-
-    // double k=w.computeNetSalary();
-    // cout<<"net salary of worker is: "<<k;
-
-    // ------------------------------------------
-    // const int MAX_EMPLOYEES = 10;
-    // Employee* employees[MAX_EMPLOYEES];
-    // int empCount = 0;
-
-    // Manager mgr(1, "Sai", 200000, 10000, "Developer");
-    // employees[empCount++] = &mgr;
-
-    // Worker w(2, "Raju", 10000, 5, 100);
-    // employees[empCount++] = &w;
-
-    // cout << "\nEmployee Details:\n";
-    // for (int i = 0; i < empCount; ++i) {
-    //     employees[i]->display();
-    //     cout << endl;
-    // }
-    // -------------------------------------------
-
-    //  int size;
-    //     cout << "Enter the size of the employee array: ";
-    //     cin >> size;
-    // Employee* employees[size];
-    Employee *employees = nullptr;
     int empCount = 0;
+    Employee *employees[empCount];
 
     while (true)
     {
@@ -142,24 +113,26 @@ int main()
             cout << "Enter Manager details:\n";
             cout << "ID: ";
             cin >> id;
+            cin.ignore();
             cout << "Name: ";
-            cin >> name;
+            getline(cin, name);
             cout << "Basic Salary: ";
             cin >> basicSalary;
             cout << "Incentive: ";
             cin >> incentive;
             cout << "Department Name: ";
-            cin >> deptName;
+            cin.ignore();
+            getline(cin, deptName);
 
             // Increase array size and add Manager
-            Employee *temp = new Manager[id];
-            for (int i = 0; i < empCount; ++i)
-            {
-                temp[i] = employees[i];
-            }
-            temp[empCount++] = Manager(id, name, basicSalary, incentive, deptName);
-            delete[] employees;
-            employees = temp;
+            // Employee *temp = new Manager[id];
+            // for (int i = 0; i < empCount; ++i)
+            // {
+            //     temp[i] = employees[i];
+            // }
+            employees[empCount++] = new Manager(id, name, basicSalary, incentive, deptName);
+            // delete[] employees;
+            // employees = temp;
             break;
         }
         case 2:
@@ -170,8 +143,11 @@ int main()
             cout << "Enter Worker details:\n";
             cout << "ID: ";
             cin >> id;
+            cin.ignore();
             cout << "Name: ";
-            cin >> name;
+            // cin >> name;
+            getline(cin, name);
+
             cout << "Basic Salary: ";
             cin >> basicSalary;
             cout << "Hours Worked: ";
@@ -180,26 +156,32 @@ int main()
             cin >> hourlyRate;
 
             // Increase array size and add Worker
-            Employee *temp = new Worker[id];
-            for (int i = 0; i < empCount; ++i)
-            {
-                temp[i] = employees[i];
-            }
-            temp[empCount++] = Worker(id, name, basicSalary, hoursWorked, hourlyRate);
-            delete[] employees;
-            employees = temp;
+            // Employee *temp = new Worker[id];
+            // for (int i = 0; i < empCount; ++i)
+            // {
+            //     temp[i] = employees[i];
+            // }
+            // temp[empCount++] = Worker(id, name, basicSalary, hoursWorked, hourlyRate);
+            // delete[] employees;
+            // employees = temp;
+            employees[empCount++] = new Worker(id, name, basicSalary, hoursWorked, hourlyRate);
+
             break;
         }
         case 3:
         {
+            cout << fixed << setprecision(2); // Set precision to 2 decimal places
             cout << "\nEmployee Details:\n";
             for (int i = 0; i < empCount; ++i)
             {
-                employees[i].display();
+                employees[i]->display();                                              // Use arrow operator to access methods for pointers
+                cout << "\nNet Salary: " << employees[i]->computeNetSalary() << endl; // Use arrow operator
                 cout << endl;
+                // computeNetSalary();
             }
             break;
         }
+
         case 4:
             // Release memory before exiting
             delete[] employees;

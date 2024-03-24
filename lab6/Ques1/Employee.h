@@ -14,10 +14,12 @@ Employee(){
     name = "Ram";
     basicSalary = 100000;
 }
-    Employee(int id,string name,int salary){
+    // Employee(int id,string name,int salary){
+            Employee(int id,string name){
+
         this->id = id;
         this->name = name;
-        this->basicSalary = salary;
+        // this->basicSalary = salary;
     }
 
     void display(){
@@ -25,9 +27,9 @@ Employee(){
         cout<<"\nName: "<<name;
     }
     
-    double computeNetSalary(){
-        return basicSalary;
-    }
+    virtual double computeNetSalary()=0;
+        // return basicSalary;
+    // }
     ~Employee(){
         cout<<endl;
     };

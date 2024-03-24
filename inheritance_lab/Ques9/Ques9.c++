@@ -111,27 +111,125 @@ public:
     }
 };
 
+// int main()
+// {
+//     vector<Shape *> shapes;
+
+//     shapes.push_back(new Circle(5));
+//     shapes.push_back(new Rectangle(3, 4));
+//     shapes.push_back(new Triangle(3, 4, 5));
+
+//     AreaSortable areaSorter;
+//     sortShapes(shapes, areaSorter);
+
+//     cout << "Sorted shapes by area:" << endl;
+//     for (const auto &shape : shapes)
+//     {
+//         cout << shape->calculateArea() << endl;
+//     }
+
+//     for (auto &shape : shapes)
+//     {
+//         delete shape;
+//     }
+
+//     return 0;
+// }
+
 int main()
 {
-    vector<Shape *> shapes;
+    int choice;
+    double radius, length, width, side1, side2, side3;
+    vector<Shape *> v;
 
-    shapes.push_back(new Circle(5));
-    shapes.push_back(new Rectangle(3, 4));
-    shapes.push_back(new Triangle(3, 4, 5));
-
-    AreaSortable areaSorter;
-    sortShapes(shapes, areaSorter);
-
-    cout << "Sorted shapes by area:" << endl;
-    for (const auto &shape : shapes)
+    do
     {
-        cout << shape->calculateArea() << endl;
-    }
+        cout << "\nMenu:\n";
+        cout << "1. Calculate area and perimeter of circle\n";
+        cout << "2. Calculate area and perimeter of rectangle\n";
+        cout << "3. Calculate area and perimeter of triangle\n";
+        cout << "4. sorting\n";
+        cout << "5. display vector\n";
+        cout << "6. exit\n";
 
-    for (auto &shape : shapes)
-    {
-        delete shape;
-    }
+        cout << "Enter your choice: ";
+        cin >> choice; // Read the user's choice here
+
+        switch (choice)
+        {
+        case 1:
+        {
+
+            cout << "Enter radius of the circle: ";
+            cin >> radius;
+            Circle *circle = new Circle(radius);
+            v.push_back(circle);
+            // circle->calculateArea();
+            // circle->calculatePerimeter();
+            break;
+        }
+        case 2:
+        {
+
+            cout << "Enter length and width of the rectangle: ";
+            cin >> length >> width;
+            Rectangle *rectangle = new Rectangle(length, width);
+            v.push_back(rectangle);
+
+            // rectangle->calculateArea();
+            // rectangle->calculatePerimeter();
+            break;
+        }
+        case 3:
+        {
+
+            cout << "Enter side1, side2, side3 of triangle: ";
+            cin >> side1 >> side2 >> side2;
+            Triangle *t = new Triangle(side1, side2, side2);
+            v.push_back(t);
+
+            // t->calculateArea();
+            // t->calculatePerimeter();
+            break;
+        }
+
+        case 4:
+        {
+            AreaSortable areaSorter;
+            sortShapes(v, areaSorter);
+
+            cout << "Sorted shapes by area:" << endl;
+            for (const auto &shape : v)
+            {
+                cout << shape->calculateArea() << endl;
+            }
+
+            break;
+        }
+            case 5:
+            {
+                for (int i = 0; i < v.size(); i++)
+                {
+                    cout << v[i]->calculateArea() << " ";
+                }
+                break;
+            }
+
+        case 6:
+        {
+            for (auto &shape : v)
+            {
+                delete shape;
+            }
+
+            cout << "Exiting the program.\n";
+            break;
+        }
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+    } while (choice != 6);
 
     return 0;
 }

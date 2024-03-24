@@ -152,7 +152,7 @@ int main()
             cout << "Invalid choice!" << endl;
             break;
         }
-    } while (id<size);
+    } while (ch!=0);
 
     return 0;
 }

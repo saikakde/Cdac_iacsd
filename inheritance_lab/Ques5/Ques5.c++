@@ -25,10 +25,10 @@ public:
         balance += interest;
         cout << "Interest calculated: " << interest << endl;
     }
-    void bDisplay(){
+    void bDisplay()
+    {
         SavingsAccount::bDisplay();
         calculateInterest();
-
     }
     ~SavingsAccount();
 };
@@ -40,7 +40,8 @@ private:
 
 public:
     // Constructor for CheckingAccount
-    CheckingAccount(int accNumber, float balance,float amount) : BankAccount(accNumber, balance) {
+    CheckingAccount(int accNumber, float balance, float amount) : BankAccount(accNumber, balance)
+    {
         this->amount = amount;
     }
 
@@ -61,15 +62,16 @@ public:
 };
 
 int main()
-{int accNumber,count=0;
-    float balance, interestRate,amount;
+{
+    int count = 0;
+    float balance, interestRate, amount;
 
     int size;
     cout << "enter the size of BankAccount arr: ";
     cin >> size;
     BankAccount *v[size];
 
-    int ch, accNumber = -1;
+    int ch, accNumber ;
 
     do
     {
